@@ -1,0 +1,34 @@
+{
+  "title": "测试豆荚 - 001",
+  "items": [
+    {
+      "type": "choice",
+      "title": "这是一道单选题",
+      "media_url": "https://www.baidu.com/logo.png",
+      "body": {
+        "options": [
+          {"id": "1", "type": "text", "context": "文本类型的选项"},
+          {"id": "2", "type": "text", "context": "文本类型的选项"},
+          {"id": "3", "type": "image", "context": "图片地址"},
+          {"id": "4", "type": "image", "context": "图片地址"}
+        ]
+      },
+      "answer": {
+        "correct": ["2"]
+      },
+      "score": 1000,
+      "duration": 30,
+      "scoreFactor": 1
+    },
+    {
+      "type": "trueOrFalse",
+      "title": "这是一道判断题，答案为错误",
+      "answer": {
+        "correct": ["2"]
+      },
+      "score": 1000,
+      "duration": 30,
+      "scoreFactor": 1
+    }
+  ]
+}

@@ -23,7 +23,7 @@ class BodoudouApi
         $this->options = $options;
 
         if (empty($this->options['endpoint'])) {
-            $this->options['endpoint'] = "https://www.bodoudou.com/";
+            $this->options['endpoint'] = "https://www.bodoudou.com";
         }
     }
 
@@ -35,8 +35,32 @@ class BodoudouApi
         return $this->request('POST', '/api-open/account/disable');
     }
 
-    public function getAccount(): array {
-        return $this->request('GET', '/api-open/account/get');
+    public function inspectAccount(): array {
+        return $this->request('GET', '/api-open/account/inspect');
+    }
+
+    public function createPaper($params): array {
+        return $this->request('POST', '/api-open/paper/create', ['json' => $params]);
+    }
+
+    public function createRoom($params): array {
+        return $this->request('POST', '/api-open/room/create', ['json' => $params]);
+    }
+
+    public function makeJoinUrl($roomId, $role, $user): string {
+        $payload = [
+            'iss' => 'bodoudou sdk room join api',
+            'exp' => time() + 86400,
+            'oid' => $roomId,
+            'role' => $role,
+            'uid' => (string) $user['id'],
+            'name' => $user['name'],
+            'avatar' => empty($user['avatar']) ? '' : $user['avatar'],
+        ];
+
+        $token = JWT::encode($payload, $this->secretKey, 'HS256', $this->accessKey);
+
+        return "{$this->options['endpoint'] }/sdk/room/join?token={$token}";
     }
 
     private function request(string $method, string $uri, array $options = []): array {
@@ -50,7 +74,7 @@ class BodoudouApi
 
         $token = JWT::encode([
             'iss' => 'bodoudou open api',
-            'exp' => time() + 600,
+            'exp' => time() + 300,
         ], $this->secretKey, 'HS256', $this->accessKey);
 
         if (!isset($options['headers'])) {
