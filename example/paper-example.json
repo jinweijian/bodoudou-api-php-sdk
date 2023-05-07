@@ -4,13 +4,13 @@
     {
       "type": "choice",
       "title": "这是一道单选题",
-      "media_url": "https://www.baidu.com/logo.png",
+      "media_url": "https://bdd-static.edusoho.cn/assets/images/default/paper-cover-1.png",
       "body": {
         "options": [
-          {"id": "1", "type": "text", "context": "文本类型的选项"},
-          {"id": "2", "type": "text", "context": "文本类型的选项"},
-          {"id": "3", "type": "image", "context": "图片地址"},
-          {"id": "4", "type": "image", "context": "图片地址"}
+          {"id": "1", "type": "text", "content": "<p>文本类型的选项 1</p>"},
+          {"id": "2", "type": "text", "content": "<p>文本类型的选项 2</p>"},
+          {"id": "3", "type": "text", "content": "<p>文本类型的选项 3</p>"},
+          {"id": "4", "type": "text", "content": "<p>文本类型的选项 4</p>"}
         ]
       },
       "answer": {
