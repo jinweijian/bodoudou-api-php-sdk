@@ -1,10 +1,11 @@
 {
   "title": "测试豆荚 - 001",
+  "isPublic": false,
   "items": [
     {
       "type": "choice",
       "title": "这是一道单选题",
-      "media_url": "https://bdd-static.edusoho.cn/assets/images/default/paper-cover-1.png",
+      "mediaUrl": "https://bdd-static.edusoho.cn/assets/images/default/paper-cover-1.png",
       "body": {
         "options": [
           {"id": "1", "type": "text", "content": "<p>文本类型的选项 1</p>"},
