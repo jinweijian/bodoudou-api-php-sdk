@@ -14,9 +14,11 @@ $options = [
 
 $api = new BodoudouApi($accessKey, $secretKey, $options);
 
+//inspectAccountExample($api);
 enableAccountExample($api);
 //disableAccountExample($api);
 //inspectAccountExample($api);
+
 
 gameJoinExample($api);
 
@@ -89,7 +91,6 @@ function gameJoinExample(BodoudouApi $api) {
 
         echo "========== room :\n";
         var_dump($room);
-
 
         $teacherUser = ['id' => '1', 'name' => '测试老师'];
         $roomTeacherJoinUrl = $api->makeJoinUrl($room['id'], 'teacher', $teacherUser);

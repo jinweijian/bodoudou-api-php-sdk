@@ -27,14 +27,17 @@ class BodoudouApi
         }
     }
 
-    public function enableAccount(): array {
-        return $this->request('POST', '/api-open/account/enable');
+    public function enableAccount(): void {
+        $this->request('POST', '/api-open/account/enable');
     }
 
-    public function disableAccount(): array {
-        return $this->request('POST', '/api-open/account/disable');
+    public function disableAccount(): void {
+        $this->request('POST', '/api-open/account/disable');
     }
 
+    /**
+     * @return array status: none, ok, disabled
+     */
     public function inspectAccount(): array {
         return $this->request('GET', '/api-open/account/inspect');
     }
