@@ -15,12 +15,14 @@ $options = [
 $api = new BodoudouApi($accessKey, $secretKey, $options);
 
 //inspectAccountExample($api);
-enableAccountExample($api);
+//enableAccountExample($api);
 //disableAccountExample($api);
 //inspectAccountExample($api);
+//validateWebhookExample($api);
+previewItemExample($api);
 
 
-gameJoinExample($api);
+//gameJoinExample($api);
 
 /**
  * 启用账号示例
@@ -110,4 +112,40 @@ function gameJoinExample(BodoudouApi $api) {
         echo "\nError Message: {$e->getMessage()}";
         echo "\nTrace Id: {$e->getTraceId()}";
     }
+}
+
+// Bearer eyJraWQiOiJ0ZXN0X2FjY2Vzc19rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJib2RvdWRvdSB3ZWJob29rIiwiZXhwIjoxNjkxNDU5ODI2fQ.b1GBr8iYD-ayC4XtNcXAElYLZnDMZ3E-V-i7QBaNLUc
+
+
+/**
+ * 校验 Webhook Token 示例
+ * @param BodoudouApi $api
+ * @return void
+ */
+function validateWebhookExample(BodoudouApi $api) {
+
+    // 从HTTP的 Authorization中取到 Token，例：
+    // Authorization: Bearer eyJraWQiOiJ0ZXN0X2FjY2Vzc19rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJib2RvdWRvdSB3ZWJob29rIiwiZXhwIjoxNjkxNDU5ODI2fQ.b1GBr8iYD-ayC4XtNcXAElYLZnDMZ3E-V-i7QBaNLUc
+    $token = 'eyJraWQiOiJ0ZXN0X2FjY2Vzc19rZXkiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJib2RvdWRvdSB3ZWJob29rIiwiZXhwIjoxNjkxNDU5ODI2fQ.b1GBr8iYD-ayC4XtNcXAElYLZnDMZ3E-V-i7QBaNLUc';
+
+    $api->validateWebhookToken($token);
+}
+
+/**
+ * 题目预览示例
+ *
+ * @param BodoudouApi $api
+ * @return void
+ */
+function previewItemExample(BodoudouApi $api) {
+    $paper = json_decode(file_get_contents(__DIR__.'/paper-example.json'), true);
+    $item = $paper['items'][0];
+
+    $previewId = $api->createItemPreviewId($item);
+
+    var_dump("preview id: ", $previewId);
+
+    $previewUrl = $api->makeItemPreviewUrl($previewId);
+
+    var_dump("preview url: ", $previewUrl);
 }
