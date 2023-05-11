@@ -1,34 +1,45 @@
 {
-  "title": "测试豆荚 - 001",
+  "title": "\u6e38\u620f\u540d\u79f0",
   "isPublic": false,
   "items": [
     {
       "type": "choice",
-      "title": "这是一道单选题",
-      "mediaUrl": "https://bdd-static.edusoho.cn/assets/images/default/paper-cover-1.png",
+      "title": "\u5355\u9009\u9898\u53ea\u6709\u9898\u5e72",
       "body": {
         "options": [
-          {"id": "1", "type": "text", "content": "<p>文本类型的选项 1</p>"},
-          {"id": "2", "type": "text", "content": "<p>文本类型的选项 2</p>"},
-          {"id": "3", "type": "text", "content": "<p>文本类型的选项 3</p>"},
-          {"id": "4", "type": "text", "content": "<p>文本类型的选项 4</p>"}
+          {
+            "id": "1",
+            "type": "image",
+            "content": "http:\/\/edusohoct.local\/files\/examQuestion\/2023\/05-09\/13434739a230998007.jpg"
+          },
+          {
+            "id": "2",
+            "type": "text",
+            "content": "2"
+          },
+          {
+            "id": "3",
+            "type": "text",
+            "content": "3"
+          },
+          {
+            "id": "4",
+            "type": "text",
+            "content": "4"
+          },
+          {
+            "id": "5",
+            "type": "text",
+            "content": "5"
+          }
         ]
       },
       "answer": {
-        "correct": ["2"]
+        "correct": [
+          "5"
+        ]
       },
-      "score": 1000,
-      "duration": 30,
-      "scoreFactor": 1
-    },
-    {
-      "type": "trueOrFalse",
-      "title": "这是一道判断题，答案为错误",
-      "answer": {
-        "correct": ["2"]
-      },
-      "score": 1000,
-      "duration": 30,
+      "duration": 90,
       "scoreFactor": 1
     }
   ]

@@ -3,7 +3,6 @@
 namespace Bodoudou\SDK;
 
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use Symfony\Component\HttpClient\HttpClient;
 use Throwable;
 
@@ -77,7 +76,14 @@ class BodoudouApi
     public function validateWebhookToken(string $token): void
     {
         try {
-            $decoded = JWT::decode($token, new Key($this->secretKey, 'HS256'));
+            if (class_exists('\Firebase\JWT\Key')) {
+                $decoded = JWT::decode($token, new \Firebase\JWT\Key($this->secretKey, 'HS256'));
+
+            } else {
+                // 兼容 Firebase/JWT 4.x 版本
+                $decoded = JWT::decode($token, $this->secretKey, array('HS256'));
+            }
+
             if (empty($decoded->iss) || $decoded->iss !== 'bodoudou webhook') {
                 throw new SDKException("Webhook iss invalid", "", "");
             }

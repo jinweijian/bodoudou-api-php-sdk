@@ -14,15 +14,15 @@ $options = [
 
 $api = new BodoudouApi($accessKey, $secretKey, $options);
 
-//inspectAccountExample($api);
+inspectAccountExample($api);
 //enableAccountExample($api);
 //disableAccountExample($api);
 //inspectAccountExample($api);
 //validateWebhookExample($api);
-previewItemExample($api);
+//previewItemExample($api);
 
 
-//gameJoinExample($api);
+gameJoinExample($api);
 
 /**
  * 启用账号示例
