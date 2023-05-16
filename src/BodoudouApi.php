@@ -115,7 +115,7 @@ class BodoudouApi
     {
         $payload = [
             'iss' => 'bodoudou sdk room join api',
-            'exp' => time() + 86400,
+            'exp' => time() + 300,
             'oid' => $roomId,
             'role' => $role,
             'uid' => (string) $user['id'],
@@ -149,7 +149,7 @@ class BodoudouApi
 
         $token = JWT::encode($payload, $this->secretKey, 'HS256', $this->accessKey);
 
-        return "{$this->options['endpoint'] }/exam/downloadReport?token={$token}";
+        return "{$this->options['endpoint'] }/sdk/exam/downloadReport?token={$token}";
     }
 
 
