@@ -19,8 +19,9 @@ $api = new BodoudouApi($accessKey, $secretKey, $options);
 //disableAccountExample($api);
 //inspectAccountExample($api);
 //validateWebhookExample($api);
-previewItemExample($api);
+//previewItemExample($api);
 //gameJoinExample($api);
+makeExamReportUrlExample($api);
 
 /**
  * 启用账号示例
@@ -146,4 +147,13 @@ function previewItemExample(BodoudouApi $api) {
     $previewUrl = $api->makeItemPreviewUrl($previewId);
 
     var_dump("preview url: ", $previewUrl);
+}
+
+function makeExamReportUrlExample(BodoudouApi $api) {
+    $examId = 'a8562738-de7d-11ed-9ff7-f5bf8930549b';
+    $viewUrl = $api->makeViewExamReportUrl($examId);
+    $downloadUrl = $api->makeDownloadExamReportUrl($examId);
+
+    var_dump($viewUrl, $downloadUrl);
+
 }

@@ -130,7 +130,7 @@ class BodoudouApi
 
     public function makeViewExamReportUrl($examId): string {
         $payload = [
-            'iss' => 'bodoudou sdk exam report api',
+            'iss' => 'bodoudou sdk exam api',
             'exp' => time() + 300,
             'id' => $examId,
         ];
@@ -142,7 +142,7 @@ class BodoudouApi
 
     public function makeDownloadExamReportUrl($examId): string {
         $payload = [
-            'iss' => 'bodoudou sdk exam report api',
+            'iss' => 'bodoudou sdk exam api',
             'exp' => time() + 300,
             'id' => $examId,
         ];
