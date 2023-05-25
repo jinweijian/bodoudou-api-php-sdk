@@ -102,7 +102,7 @@ class BodoudouApi
     public function makeItemPreviewUrl(string $previewId): string {
         $payload = [
             'iss' => 'bodoudou sdk item preview api',
-            'exp' => time() + 300,
+            'exp' => time() + 600,
             'id' => $previewId,
         ];
 
@@ -115,7 +115,7 @@ class BodoudouApi
     {
         $payload = [
             'iss' => 'bodoudou sdk room join api',
-            'exp' => time() + 300,
+            'exp' => time() + 600,
             'oid' => $roomId,
             'role' => $role,
             'uid' => (string) $user['id'],
@@ -131,7 +131,7 @@ class BodoudouApi
     public function makeViewExamReportUrl($examId): string {
         $payload = [
             'iss' => 'bodoudou sdk exam api',
-            'exp' => time() + 300,
+            'exp' => time() + 86400,
             'id' => $examId,
         ];
 
@@ -143,7 +143,7 @@ class BodoudouApi
     public function makeDownloadExamReportUrl($examId): string {
         $payload = [
             'iss' => 'bodoudou sdk exam api',
-            'exp' => time() + 300,
+            'exp' => time() + 86400,
             'id' => $examId,
         ];
 
