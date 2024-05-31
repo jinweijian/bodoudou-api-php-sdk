@@ -4,12 +4,14 @@ namespace Bodoudou\SDK;
 
 use Bodoudou\SDK\Exceptions\BadGatewayException;
 use Bodoudou\SDK\Exceptions\BadRequestException;
+use Bodoudou\SDK\Exceptions\ClientErrorException;
 use Bodoudou\SDK\Exceptions\GatewayTimeoutException;
 use Bodoudou\SDK\Exceptions\InternalServerErrorException;
 use Bodoudou\SDK\Exceptions\NotFoundException;
 use Bodoudou\SDK\Exceptions\RequestException;
 use Bodoudou\SDK\Exceptions\SDKException;
 use Firebase\JWT\JWT;
+use MongoDB\Driver\Exception\ServerException;
 use Symfony\Component\HttpClient\HttpClient;
 use Throwable;
 
@@ -200,20 +202,14 @@ class BodoudouApi
         $message = $content['message'] ?? '';
         $code = $content['code'] ?? 'UNKNOWN';
         $traceId = $content['traceId'] ?? '';
-        if (400 == $httpCode) {
-            throw new BadRequestException($message, $code, $traceId);
-        }
         if (404 == $httpCode) {
             throw new NotFoundException($message, $code, $traceId);
         }
-        if (500 == $httpCode) {
-            throw new InternalServerErrorException($message, $code, $traceId);
+        if (400 <= $httpCode && $httpCode < 500) {
+            throw new ClientErrorException($message, $code, $traceId, $httpCode);
         }
-        if (502 == $httpCode) {
-            throw new BadGatewayException($message, $code, $traceId);
-        }
-        if (504 == $httpCode) {
-            throw new GatewayTimeoutException($message, $code, $traceId);
+        if (500 <= $httpCode) {
+            throw new ServerException($message, $code, $traceId, $httpCode);
         }
         throw new RequestException($message, $code, $traceId, $httpCode);
     }
