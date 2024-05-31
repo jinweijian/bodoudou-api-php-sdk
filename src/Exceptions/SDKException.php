@@ -1,6 +1,6 @@
 <?php
 
-namespace Bodoudou\SDK;
+namespace Bodoudou\SDK\Exceptions;
 
 use RuntimeException;
 

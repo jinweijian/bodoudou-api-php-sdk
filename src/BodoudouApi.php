@@ -2,6 +2,13 @@
 
 namespace Bodoudou\SDK;
 
+use Bodoudou\SDK\Exceptions\BadRequestException;
+use Bodoudou\SDK\Exceptions\GatewayTimeoutException;
+use Bodoudou\SDK\Exceptions\InternalServerErrorException;
+use Bodoudou\SDK\Exceptions\NotFoundException;
+use Bodoudou\SDK\Exceptions\RequestException;
+use Bodoudou\SDK\Exceptions\RequestTimeoutException;
+use Bodoudou\SDK\Exceptions\SDKException;
 use Firebase\JWT\JWT;
 use Symfony\Component\HttpClient\HttpClient;
 use Throwable;
@@ -181,10 +188,36 @@ class BodoudouApi
             throw new SDKException($e->getMessage(), 'HTTP_ERROR', '');
         }
 
-        if ($status >= 300 || $status < 200) {
-            throw new SDKException($content['message'] ?? '', $content['code'] ?? 'UNKNOWN', $content['traceId'] ?? '');
-        }
-
+        $this->handleStatusCode($status, $content);
         return $content;
+    }
+
+    private function handleStatusCode($httpCode, $content)
+    {
+        if ($httpCode < 300 && $httpCode >= 200) {
+            return;
+        }
+        $message = $content['message'] ?? '';
+        $code = $content['code'] ?? 'UNKNOWN';
+        $traceId = $content['traceId'] ?? '';
+        if (400 == $httpCode) {
+            throw new BadRequestException($message, $code, $traceId);
+        }
+        if (404 == $httpCode) {
+            throw new NotFoundException($message, $code, $traceId);
+        }
+        if (408 == $httpCode) {
+            throw new RequestTimeoutException($message, $code, $traceId);
+        }
+        if (500 == $httpCode) {
+            throw new InternalServerErrorException($message, $code, $traceId);
+        }
+        if (502 == $httpCode) {
+            throw new GatewayTimeoutException($message, $code, $traceId);
+        }
+        if (504 == $httpCode) {
+            throw new GatewayTimeoutException($message, $code, $traceId);
+        }
+        throw new RequestException($message, $code, $traceId, $httpCode);
     }
 }

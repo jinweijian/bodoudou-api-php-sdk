@@ -1,7 +1,7 @@
 <?php
 
 use Bodoudou\SDK\BodoudouApi;
-use Bodoudou\SDK\SDKException;
+use Bodoudou\SDK\Exceptions\SDKException;
 
 require dirname(__DIR__). '/vendor/autoload.php';
 
