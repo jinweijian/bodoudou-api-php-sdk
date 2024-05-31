@@ -2,12 +2,12 @@
 
 namespace Bodoudou\SDK;
 
+use Bodoudou\SDK\Exceptions\BadGatewayException;
 use Bodoudou\SDK\Exceptions\BadRequestException;
 use Bodoudou\SDK\Exceptions\GatewayTimeoutException;
 use Bodoudou\SDK\Exceptions\InternalServerErrorException;
 use Bodoudou\SDK\Exceptions\NotFoundException;
 use Bodoudou\SDK\Exceptions\RequestException;
-use Bodoudou\SDK\Exceptions\RequestTimeoutException;
 use Bodoudou\SDK\Exceptions\SDKException;
 use Firebase\JWT\JWT;
 use Symfony\Component\HttpClient\HttpClient;
@@ -206,14 +206,11 @@ class BodoudouApi
         if (404 == $httpCode) {
             throw new NotFoundException($message, $code, $traceId);
         }
-        if (408 == $httpCode) {
-            throw new RequestTimeoutException($message, $code, $traceId);
-        }
         if (500 == $httpCode) {
             throw new InternalServerErrorException($message, $code, $traceId);
         }
         if (502 == $httpCode) {
-            throw new GatewayTimeoutException($message, $code, $traceId);
+            throw new BadGatewayException($message, $code, $traceId);
         }
         if (504 == $httpCode) {
             throw new GatewayTimeoutException($message, $code, $traceId);
